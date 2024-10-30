@@ -1,15 +1,19 @@
+import os
+import sys
 import numpy as np
 from sigmf import SigMFFile, sigmffile
 from scipy.signal import decimate
 from matplotlib import pyplot as plt
 from scipy.ndimage import gaussian_filter
 
+script_directory = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_directory)
 DECIMATION_RATE = 4
 NFFT = 1024 
 # NFFT = 8192
 
 # Read data
-filename = 'signal_to_noise.sigmf-data'
+filename = 'signal_to_noise'
 signal = sigmffile.fromfile(filename)
 samples = signal.read_samples().view(np.complex64).flatten()
 sample_rate = signal.get_global_field(SigMFFile.SAMPLE_RATE_KEY)
